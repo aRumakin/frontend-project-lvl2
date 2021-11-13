@@ -24,22 +24,15 @@ const genDiff = (filepath1, filepath2) => {
       acc.push(`+ ${key}: ${value2}`);
       // acc[`- ${key}`] = value1;
       // acc[`+ ${key}`] = value2;
-      return acc;
-    }
-    if (_.has(file2, key) && !_.has(file1, key)) {
+    } else if (_.has(file2, key) && !_.has(file1, key)) {
       acc.push(`+ ${key}: ${value2}`);
       // acc[`+ ${key}`] = value2;
-      return acc;
-    }
-    if (!_.has(file2, key)) {
+    } else if (!_.has(file2, key)) {
       acc.push(`- ${key}: ${value1}`);
       // acc[`- ${key}`] = value1;
-      return acc;
-    }
-    if (_.has(file1, key) && _.has(file2, key) && _.isEqual(value1, value2)) {
+    } else if (_.has(file1, key) && _.has(file2, key) && _.isEqual(value1, value2)) {
       acc.push(`  ${key}: ${value1}`);
       // acc[`  ${key}`] = value1;
-      return acc;
     }
     return acc;
   }, []);
