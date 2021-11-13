@@ -48,4 +48,4 @@ const genDiff = (filepath1, filepath2) => {
   return `{\n  ${result}\n}`;
 };
 
-export { genDiff };
+export default genDiff;
