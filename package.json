@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/aRumakin/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/aRumakin/frontend-project-lvl2/actions)",
-  "main": "index.js",
+  "main": "src/index.js",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/aRumakin/frontend-project-lvl2.git"
   },
-  "author": "",
+  "author": "Andrey Rumakin",
   "license": "ISC",
   "type": "module",
   "bugs": {
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/aRumakin/frontend-project-lvl2#readme",
   "dependencies": {
-    "commander": "^8.3.0"
+    "commander": "^8.3.0",
+    "lodash": "^4.17.21"
   }
 }
