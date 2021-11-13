@@ -22,6 +22,10 @@
   "homepage": "https://github.com/aRumakin/frontend-project-lvl2#readme",
   "dependencies": {
     "commander": "^8.3.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "eslint": "^8.2.0"
   }
 }
