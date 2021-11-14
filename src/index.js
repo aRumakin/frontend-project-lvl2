@@ -2,8 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
 
-const getFile = (filename) => fs.readFileSync(path.resolve(process.cwd(), filename.trim()), 'utf-8');
-// const getFormat = (filename) => path.extname(filename).slice(1);
+const getFile = (filepath) => fs.readFileSync(path.resolve(process.cwd(), filepath.trim()), 'utf-8');
+// const getFormat = (filename) => path.extname(filename);
 const getKeys = (filename) => Object.keys(filename);
 
 const genDiff = (filepath1, filepath2) => {

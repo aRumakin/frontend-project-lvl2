@@ -1,3 +1,5 @@
 ## Ignore dirs and files
 
 /node_modules/
+/coverage/
+*.log
