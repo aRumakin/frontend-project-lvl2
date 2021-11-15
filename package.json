@@ -7,7 +7,7 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -21,9 +21,11 @@
   },
   "homepage": "https://github.com/aRumakin/frontend-project-lvl2#readme",
   "dependencies": {
+    "@jest/globals": "^27.3.1",
     "commander": "^8.3.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.3",
+    "jest-circus": "^27.3.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {

@@ -6,31 +6,32 @@ const getFile = (filepath) => fs.readFileSync(path.resolve(process.cwd(), filepa
 // const getFormat = (filename) => path.extname(filename);
 const getKeys = (filename) => Object.keys(filename);
 
-const genDiff = (filepath1, filepath2) => {
+const genDiff = (file1, file2) => {
   // const file1Format = getFormat(filepath1);
   // const file2Format = getFormat(filepath2);
-  const file1 = JSON.parse(getFile(filepath1));
-  const file2 = JSON.parse(getFile(filepath2));
 
-  const keys1 = getKeys(file1);
-  const keys2 = getKeys(file2);
+  const parsedFile1 = JSON.parse(file1);
+  const parsedFile2 = JSON.parse(file2);
+
+  const keys1 = getKeys(parsedFile1);
+  const keys2 = getKeys(parsedFile2);
   const arrOfKeys = _.union(keys1, keys2);
   const sortedKeys = _.sortBy(arrOfKeys);
   const resultValues = sortedKeys.reduce((acc, key) => {
-    const value1 = file1[key];
-    const value2 = file2[key];
-    if (_.has(file1, key) && _.has(file2, key) && value1 !== value2) {
+    const value1 = parsedFile1[key];
+    const value2 = parsedFile2[key];
+    if (_.has(parsedFile1, key) && _.has(parsedFile2, key) && value1 !== value2) {
       acc.push(`- ${key}: ${value1}`);
       acc.push(`+ ${key}: ${value2}`);
       // acc[`- ${key}`] = value1;
       // acc[`+ ${key}`] = value2;
-    } else if (_.has(file2, key) && !_.has(file1, key)) {
+    } else if (_.has(parsedFile2, key) && !_.has(parsedFile1, key)) {
       acc.push(`+ ${key}: ${value2}`);
       // acc[`+ ${key}`] = value2;
-    } else if (!_.has(file2, key)) {
+    } else if (!_.has(parsedFile2, key)) {
       acc.push(`- ${key}: ${value1}`);
       // acc[`- ${key}`] = value1;
-    } else if (_.has(file1, key) && _.has(file2, key) && _.isEqual(value1, value2)) {
+    } else if (_.has(parsedFile1, key) && _.has(parsedFile2, key) && _.isEqual(value1, value2)) {
       acc.push(`  ${key}: ${value1}`);
       // acc[`  ${key}`] = value1;
     }
@@ -41,4 +42,4 @@ const genDiff = (filepath1, filepath2) => {
   return `{\n  ${result}\n}`;
 };
 
-export default genDiff;
+export { genDiff, getFile };
