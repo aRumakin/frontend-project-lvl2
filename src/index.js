@@ -1,43 +1,36 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
+import parseFile from './parsers.js';
 
-const getFile = (filepath) => fs.readFileSync(path.resolve(process.cwd(), filepath.trim()), 'utf-8');
-// const getFormat = (filename) => path.extname(filename);
+const getFile = (filepath) => {
+  const pathToFile = fs.readFileSync(path.resolve(process.cwd(), filepath.trim()), 'utf-8');
+  return parseFile(pathToFile, filepath);
+};
+
 const getKeys = (filename) => Object.keys(filename);
 
 const genDiff = (file1, file2) => {
-  // const file1Format = getFormat(filepath1);
-  // const file2Format = getFormat(filepath2);
-
-  const parsedFile1 = JSON.parse(file1);
-  const parsedFile2 = JSON.parse(file2);
-
-  const keys1 = getKeys(parsedFile1);
-  const keys2 = getKeys(parsedFile2);
+  console.log(file1, file2);
+  const keys1 = getKeys(file1);
+  const keys2 = getKeys(file2);
   const arrOfKeys = _.union(keys1, keys2);
   const sortedKeys = _.sortBy(arrOfKeys);
   const resultValues = sortedKeys.reduce((acc, key) => {
-    const value1 = parsedFile1[key];
-    const value2 = parsedFile2[key];
-    if (_.has(parsedFile1, key) && _.has(parsedFile2, key) && value1 !== value2) {
+    const value1 = file1[key];
+    const value2 = file2[key];
+    if (_.has(file1, key) && _.has(file2, key) && value1 !== value2) {
       acc.push(`- ${key}: ${value1}`);
       acc.push(`+ ${key}: ${value2}`);
-      // acc[`- ${key}`] = value1;
-      // acc[`+ ${key}`] = value2;
-    } else if (_.has(parsedFile2, key) && !_.has(parsedFile1, key)) {
+    } else if (_.has(file2, key) && !_.has(file1, key)) {
       acc.push(`+ ${key}: ${value2}`);
-      // acc[`+ ${key}`] = value2;
-    } else if (!_.has(parsedFile2, key)) {
+    } else if (!_.has(file2, key)) {
       acc.push(`- ${key}: ${value1}`);
-      // acc[`- ${key}`] = value1;
-    } else if (_.has(parsedFile1, key) && _.has(parsedFile2, key) && _.isEqual(value1, value2)) {
+    } else if (_.has(file1, key) && _.has(file2, key) && _.isEqual(value1, value2)) {
       acc.push(`  ${key}: ${value1}`);
-      // acc[`  ${key}`] = value1;
     }
     return acc;
   }, []);
-  //  }, {});
   const result = resultValues.join('\n  ');
   return `{\n  ${result}\n}`;
 };
