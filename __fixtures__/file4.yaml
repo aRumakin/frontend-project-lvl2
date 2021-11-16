@@ -1,0 +1,4 @@
+adapter:  usb-c
+host:     localhost
+database: ssd_drive_2
+card:     ex

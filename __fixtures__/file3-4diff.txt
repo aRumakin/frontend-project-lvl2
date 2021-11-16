@@ -1,0 +1,9 @@
+{
+  - adapter: postgres
+  + adapter: usb-c
+  + card: ex
+  - database: myapp_development
+  + database: ssd_drive_2
+    host: localhost
+  - mode: 1
+}

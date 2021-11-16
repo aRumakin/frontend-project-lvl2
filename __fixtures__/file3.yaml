@@ -1,0 +1,4 @@
+adapter:  postgres
+database: myapp_development
+host:     localhost
+mode:     1
