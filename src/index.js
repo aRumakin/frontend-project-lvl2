@@ -11,7 +11,6 @@ const getFile = (filepath) => {
 const getKeys = (filename) => Object.keys(filename);
 
 const genDiff = (file1, file2) => {
-  console.log(file1, file2);
   const keys1 = getKeys(file1);
   const keys2 = getKeys(file2);
   const arrOfKeys = _.union(keys1, keys2);
