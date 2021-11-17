@@ -18,7 +18,9 @@ const genDiff = (file1, file2) => {
   const resultValues = sortedKeys.reduce((acc, key) => {
     const value1 = file1[key];
     const value2 = file2[key];
-    if (_.has(file1, key) && _.has(file2, key) && value1 !== value2) {
+    if (_.isObject(key)) { // fix
+      genDiff(value1, value2); // fix
+    } else if (_.has(file1, key) && _.has(file2, key) && value1 !== value2) {
       acc.push(`- ${key}: ${value1}`);
       acc.push(`+ ${key}: ${value2}`);
     } else if (_.has(file2, key) && !_.has(file1, key)) {
