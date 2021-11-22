@@ -32,18 +32,29 @@ test('Checking getFile with YAML', () => {
 });
 
 test('Checking the result with JSON', () => {
-  const expectDiff = genDiff(jsonParser('file1.json'), jsonParser('file2.json'));
-  expect(expectDiff).toEqual(readFile('file1-2diff.txt'));
+  const expectDiff = genDiff(jsonParser('file5.json'), jsonParser('file6.json'));
+  expect(expectDiff).toEqual(readFile('file_diff.txt'));
   expect(typeof expectDiff).toEqual('string');
 });
 
 test('Checking the result with YAML', () => {
-  const expectDiff = genDiff(yamlLoader('file3.yaml'), yamlLoader('file4.yaml'));
-  expect(expectDiff).toEqual(readFile('file3-4diff.txt'));
+  const expectDiff = genDiff(yamlLoader('file7.yaml'), yamlLoader('file8.yaml'));
+  expect(expectDiff).toEqual(readFile('file_diff.txt'));
   expect(typeof expectDiff).toEqual('string');
+});
+
+test('Checking the result plain format', () => {
+  const expectDiff = genDiff(yamlLoader('file7.yaml'), yamlLoader('file8.yaml'), 'plain');
+  expect(expectDiff).toEqual(readFile('file_diff_plain.txt'));
+  expect(typeof expectDiff).toEqual('string');
+});
+
+test('Checking the wrong plain format', () => {
+  const expectDiff = genDiff(yamlLoader('file7.yaml'), yamlLoader('file8.yaml'), 'forward');
+  expect(expectDiff).toBe('Format forward is not supported.');
 });
 
 test('Checking not supported files', () => {
   const answer = parseFile('file1-2diff.txt', getFixturePath('file1-2diff.txt'));
-  expect(answer).toBe('File is not supported.');
+  expect(answer).toBe('Format .txt is not supported.');
 });
