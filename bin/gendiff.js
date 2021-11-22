@@ -10,10 +10,10 @@ program
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'output format')
   .arguments('<filepath1> <filepath2>')
-  .action((filepath1, filepath2) => {
+  .action((filepath1, filepath2, { format }) => {
     const file1 = getFile(filepath1);
     const file2 = getFile(filepath2);
-    console.log(genDiff(file1, file2));
+    console.log(genDiff(file1, file2, format));
   });
 
 program.parse();
