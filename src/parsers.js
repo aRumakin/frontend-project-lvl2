@@ -11,7 +11,7 @@ const parseFile = (file, filepath) => {
   if (format === '.yml' || format === '.yaml') {
     return yaml.load(file);
   }
-  return 'File is not supported.';
+  return `Format ${format} is not supported.`;
 };
 
 export default parseFile;
