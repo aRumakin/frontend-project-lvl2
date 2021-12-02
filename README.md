@@ -10,3 +10,19 @@
 Difference generator for flat JSON and YAML files
 
 [![asciicast](https://asciinema.org/a/aatyLxcw2LTqDDM9gtYUCWhIJ.svg)](https://asciinema.org/a/aatyLxcw2LTqDDM9gtYUCWhIJ)
+
+## Install dependencies 
+
+```
+$ make install
+```
+
+## Install package
+
+```
+$ npm link
+```
+
+## About Generator of Differences
+
+GenDiff is a tool for finding differences between two files.
