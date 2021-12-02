@@ -49,6 +49,12 @@ test('Checking the result plain format', () => {
   expect(typeof expectDiff).toEqual('string');
 });
 
+test('Checking the result JSON format', () => {
+  const expectDiff = genDiff(jsonParser('file5.json'), jsonParser('file6.json'), 'json');
+  expect(expectDiff).toEqual(readFile('file_diff_stringify.txt'));
+  expect(typeof expectDiff).toEqual('string');
+});
+
 test('Checking the wrong plain format', () => {
   const expectDiff = genDiff(yamlLoader('file7.yaml'), yamlLoader('file8.yaml'), 'forward');
   expect(expectDiff).toBe('Format forward is not supported.');
