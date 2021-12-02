@@ -9,7 +9,7 @@
 
 Difference generator for flat JSON and YAML files
 
-[![asciicast](https://asciinema.org/a/aatyLxcw2LTqDDM9gtYUCWhIJ.svg)](https://asciinema.org/a/aatyLxcw2LTqDDM9gtYUCWhIJ)
+[![asciicast](https://asciinema.org/a/rG44UoUjhpUkSBcf3jjvqHkTz.svg)](https://asciinema.org/a/rG44UoUjhpUkSBcf3jjvqHkTz)
 
 ## Install dependencies 
 
