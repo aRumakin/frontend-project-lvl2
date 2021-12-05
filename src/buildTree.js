@@ -6,19 +6,21 @@ const buildTree = (data1, data2) => {
   return sortedKeys.map((key) => {
     const value1 = data1[key];
     const value2 = data2[key];
-    let result = { type: 'same', key, val: value1 };
     if (!_.has(data1, key)) {
-      result = { type: 'add', key, val: value2 };
-    } else if (!_.has(data2, key)) {
-      result = { type: 'remove', key, val: value1 };
-    } else if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
-      result = { type: 'recursion', key, children: buildTree(value1, value2) };
-    } else if (!_.isEqual(value1, value2)) {
-      result = {
+      return { type: 'add', key, val: value2 };
+    }
+    if (!_.has(data2, key)) {
+      return { type: 'remove', key, val: value1 };
+    }
+    if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
+      return { type: 'recursion', key, children: buildTree(value1, value2) };
+    }
+    if (!_.isEqual(value1, value2)) {
+      return {
         type: 'updated', key, val1: value1, val2: value2,
       };
     }
-    return result;
+    return { type: 'same', key, val: value1 };
   });
 };
 
