@@ -11,13 +11,12 @@ const getData = (filepath) => {
 
 const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const getTree = buildTree(getData(filepath1), getData(filepath2));
-  let result = '';
   try {
-    result = formatter(getTree, formatName);
+    formatter(getTree, formatName);
   } catch (e) {
     return e.message;
   }
-  return result;
+  return formatter(getTree, formatName);
 };
 
 export default genDiff;
