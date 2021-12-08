@@ -1,4 +1,3 @@
-import yaml from 'js-yaml';
 import stylish from './stylish.js';
 import plain from './plain.js';
 
@@ -15,14 +14,4 @@ const formatter = (tree, formatterName) => {
   }
 };
 
-const parseFile = (file, format) => {
-  if (format === 'json') {
-    return JSON.parse(file);
-  }
-  if (format === 'yml' || format === 'yaml') {
-    return yaml.load(file);
-  }
-  return `Format ${format} is not supported.`;
-};
-
-export { formatter, parseFile };
+export default formatter;

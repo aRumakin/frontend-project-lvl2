@@ -3,7 +3,8 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { expect, test } from '@jest/globals';
 import genDiff from '../src/index.js';
-import { parseFile } from '../src/formatters/index.js';
+import parseFile from '../src/parsers.js';
+import formatter from '../src/formatters/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -19,35 +20,33 @@ test('Checking type of result', () => {
 });
 
 test('Checking the result with JSON', () => {
-  const expectDiff = genDiff(getFixturePath('file5.json'), getFixturePath('file6.json'));
+  const expectDiff = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'));
   expect(expectDiff).toEqual(readFile('../__fixtures__/file_diff.txt'));
   expect(typeof expectDiff).toEqual('string');
 });
 
 test('Checking the result with YAML', () => {
-  const expectDiff = genDiff(getFixturePath('file7.yaml'), getFixturePath('file8.yaml'));
-  expect(expectDiff).toEqual(readFile('file_diff.txt'));
+  const expectDiff = genDiff(getFixturePath('file3.yml'), getFixturePath('file4.yaml'));
+  expect(expectDiff).toEqual(readFile('../__fixtures__/file_diff.txt'));
   expect(typeof expectDiff).toEqual('string');
 });
 
 test('Checking the result plain format', () => {
-  const expectDiff = genDiff(getFixturePath('file7.yaml'), getFixturePath('file8.yaml'), 'plain');
-  expect(expectDiff).toEqual(readFile('file_diff_plain.txt'));
+  const expectDiff = genDiff(getFixturePath('file3.yml'), getFixturePath('file4.yaml'), 'plain');
+  expect(expectDiff).toEqual(readFile('../__fixtures__/file_diff_plain.txt'));
   expect(typeof expectDiff).toEqual('string');
 });
 
 test('Checking the result JSON format', () => {
-  const expectDiff = genDiff(getFixturePath('file5.json'), getFixturePath('file6.json'), 'json');
-  expect(expectDiff).toEqual(readFile('file_diff_stringify.txt'));
+  const expectDiff = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'json');
+  expect(expectDiff).toEqual(readFile('../__fixtures__/file_diff_stringify.txt'));
   expect(typeof expectDiff).toEqual('string');
 });
 
 test('Checking the wrong plain format', () => {
-  const expectDiff = genDiff(getFixturePath('file7.yaml'), getFixturePath('file8.yaml'), 'forward');
-  expect(expectDiff).toEqual('Format forward is not supported.');
+  expect(() => formatter(null, 'forward')).toThrow(Error);
 });
 
 test('Checking not supported files', () => {
-  const answer = parseFile('file1-2diff.txt', 'txt');
-  expect(answer).toBe('Format txt is not supported.');
+  expect(() => parseFile(null, 'txt')).toThrow(Error);
 });

@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { formatter, parseFile } from './formatters/index.js';
+import parseFile from './parsers.js';
+import formatter from './formatters/index.js';
 import buildTree from './buildTree.js';
 
 const getData = (filepath) => {
@@ -11,11 +12,6 @@ const getData = (filepath) => {
 
 const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const getTree = buildTree(getData(filepath1), getData(filepath2));
-  try {
-    formatter(getTree, formatName);
-  } catch (e) {
-    return e.message;
-  }
   return formatter(getTree, formatName);
 };
 
